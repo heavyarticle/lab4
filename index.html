@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Портфолио веб-разработчика — Иван Петров</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Базовые стили */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* плавная прокрутка по якорям */
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            color: #222;
+            background: #f5f5f7;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Шапка и меню */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        /* Адаптивная SVG-иконка (логотип) */
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 16px;
+        }
+
+        nav a {
+            font-size: 15px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            transition: background 0.2s;
+        }
+
+        nav a:hover {
+            background: #efeff4;
+        }
+
+        /* Кнопка меню для мобильных */
+        .menu-toggle {
+            display: none;
+            border: none;
+            background: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                right: 16px;
+                top: 56px;
+                flex-direction: column;
+                background: #fff;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+                padding: 12px;
+                min-width: 170px;
+            }
+
+            nav ul.open {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        /* Hero секция */
+        .hero {
+            padding: 48px 0 32px;
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 1.3fr);
+            gap: 32px;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .hero-text {
+            font-size: 15px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn-primary,
+        .btn-outline {
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-size: 14px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-primary {
+            background: #0070f3;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #0059c8;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: #c4c4c4;
+        }
+
+        .btn-outline:hover {
+            background: #efeff4;
+        }
+
+        .hero-photo-wrapper {
+            background: #fff;
+            border-radius: 24px;
+            padding: 16px;
+            box-shadow: 0 18px 45px rgba(0,0,0,0.08);
+        }
+
+        .hero-photo {
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .hero-photo-caption {
+            margin-top: 10px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        /* Общие стили секций */
+        section {
+            padding: 32px 0;
+        }
+
+        section:nth-of-type(odd) {
+            background: #ffffff;
+        }
+
+        section:nth-of-type(even) {
+            background: #f5f5f7;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        /* ОБО МНЕ */
+        .about-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-text p {
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .skills-list li {
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: #efeff4;
+        }
+
+        /* Портфолио + Галерея */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 16px;
+            box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .project-title {
+            font-weight: 600;
+        }
+
+        .project-tag {
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* Галерея изображений (3–5 штук в сетке) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .gallery-item {
+            border-radius: 14px;
+            overflow: hidden;
+            background: #ddd;
+        }
+
+        /* Контакты + форма */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.5fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-info p {
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .contact-info a {
+            color: #0059c8;
+        }
+
+        form {
+            background: #fff;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        }
+
+        .form-row {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid #d0d0d0;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: #d20000;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-success {
+            font-size: 13px;
+            color: #008000;
+            margin-top: 8px;
+            display: none;
+        }
+
+        /* QR-код секция */
+        .qr-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .qr-note {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .qr-image {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 12px;
+            border: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Футер */
+        footer {
+            background: #0f172a;
+            color: #f9fafb;
+            padding: 18px 0;
+            margin-top: 24px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .social-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #1f2937;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .footer-contacts a {
+            color: #60a5fa;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-inner">
+        <div class="logo">
+            <!-- Адаптивная SVG-иконка (логотип) -->
+            <svg viewBox="0 0 64 64" aria-hidden="true">
+                <defs>
+                    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+                        <stop offset="0" stop-color="#0070f3"/>
+                        <stop offset="1" stop-color="#00c6ff"/>
+                    </linearGradient>
+                </defs>
+                <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#g)"/>
+                <path d="M20 40 L28 24 L36 40 L44 24" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Иван Петров
+        </div>
+
+        <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+
+        <nav>
+            <ul id="nav-list">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Обо мне</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- ГЛАВНАЯ -->
+    <section id="home" class="hero">
+        <div class="container hero-inner">
+            <div>
+                <h1 class="hero-title">Веб-разработчик для малого бизнеса и личных брендов</h1>
+                <p class="hero-subtitle">Создаю аккуратные, быстрые и понятные сайты, которые помогают продавать и рассказывать о вас.</p>
+                <p class="hero-text">
+                    Меня зовут Иван Петров, я занимаюсь фронтенд-разработкой и адаптивной вёрсткой. 
+                    Работаю с современным стеком и аккуратно подстраиваю каждое решение под задачи клиента. 
+                    В портфолио — лендинги для локальных кофеен, небольших студий и персональные сайты для специалистов, 
+                    которые переходят во фриланс и хотят выглядеть профессионально в сети.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#portfolio" class="btn-primary">Смотреть работы</a>
+                    <a href="#contacts" class="btn-outline">Обсудить проект</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrapper">
+                <!-- ОРИГИНАЛЬНОЕ ФОТО: замени src на своё изображение -->
+                <div class="hero-photo">
+                    <img src="img/me.jpg" alt="Фотография Ивана Петрова за рабочим столом">
+                </div>
+                <p class="hero-photo-caption">
+                    Мой рабочий уголок: ноутбук, заметки и любимая кружка кофе. 
+                    Фото сделано лично, без стоков.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ОБО МНЕ -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <p class="section-subtitle">Кратко о подходе к работе и технологиях.</p>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        Я помогаю предпринимателям и экспертам в своём деле превратить идеи в рабочие сайты. 
+                        Для меня важно, чтобы каждая страница была не только аккуратно сверстана, но и решала 
+                        конкретную задачу: привести заявку, показать портфолио или просто объяснить, чем вы занимаетесь.
+                    </p>
+                    <p>
+                        В проектах уделяю внимание структуре, читаемости текста и удобству на мобильных устройствах. 
+                        Стараюсь объяснять технические вещи простыми словами и всегда оставляю клиента с понятным 
+                        чек-листом по дальнейшим шагам.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-size:16px; margin-bottom:8px;">Основные навыки:</h3>
+                    <ul class="skills-list">
+                        <li>HTML5 &amp; семантика</li>
+                        <li>CSS3 / Flexbox / Grid</li>
+                        <li>Адаптивная вёрстка</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>Работа с макетами Figma</li>
+                        <li>Оптимизация изображений</li>
+                        <li>Настройка домена и хостинга</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО + ГАЛЕРЕЯ -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Портфолио</h2>
+            <p class="section-subtitle">Несколько выбранных проектов и галерея интерфейсов.</p>
+
+            <div class="portfolio-grid">
+                <article class="project-card">
+                    <h3 class="project-title">Лендинг кофейни «Утро рядом»</h3>
+                    <p class="project-tag">Адаптивный сайт для локального бизнеса</p>
+                    <p>
+                        Небольшой, но тёплый лендинг для домашней кофейни. 
+                        Сделаны блоки с меню, отзывами и картой проезда. 
+                        Основной упор — на атмосферу и быстрый просмотр с телефона.
+                    </p>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="project-title">Сайт-портфолио фотографа</h3>
+                    <p class="project-tag">Галерея работ и система заявок</p>
+                    <p>
+                        Одностраничный сайт с аккуратной сеткой фотографий и разделом с ценами. 
+                        Форма заявки уходит на почту фотографа и дублируется в мессенджер.
+                    </p>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="project-title">Личный сайт эксперта по маркетингу</h3>
+                    <p class="project-tag">Личный бренд и лид-магнит</p>
+                    <p>
+                        Страница с описанием услуг, блоком кейсов и формой для записи на консультацию. 
+                        Добавлены раздел FAQ и небольшая библиотека материалов для подписчиков.
+                    </p>
+                </article>
+            </div>
+
+            <h3 style="font-size:18px; margin-bottom:10px;">Галерея интерфейсов</h3>
+            <p class="section-subtitle" style="margin-bottom:14px;">
+                Несколько фрагментов макетов: карточки товаров, заголовки блоков и мобильные версии меню.
+            </p>
+
+            <!-- ГАЛЕРЕЯ: замени пути к изображениям на свои работы -->
+            <div class="gallery-grid">
+                <figure class="gallery-item">
+                    <img src="img/gallery-1.jpg" alt="Макет лендинга кофейни на ноутбуке">
+                </figure>
+                <figure class="gallery-item">
+                    <img src="img/gallery-2.jpg" alt="Фрагмент адаптивного меню сайта">
+                </figure>
+                <figure class="gallery-item">
+                    <img src="img/gallery-3.jpg" alt="Мобильная версия страницы портфолио">
+                </figure>
+                <figure class="gallery-item">
+                    <img src="img/gallery-4.jpg" alt="Сетка карточек товаров интернет-витрины">
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТЫ + ФОРМА -->
+    <section id="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <p class="section-subtitle">Заполните форму или напишите любым удобным способом.</p>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p><strong>Email:</strong> <a href="mailto:hello@ivan.dev">hello@ivan.dev</a></p>
+                    <p><strong>Телефон:</strong> <a href="tel:+79991234567">+7&nbsp;999&nbsp;123-45-67</a></p>
+                    <p>
+                        Обычно отвечаю в течение рабочего дня. 
+                        Кратко опишите задачу: тип сайта, примерный объём и желаемые сроки — так я смогу 
+                        быстрее предложить подходящий формат сотрудничества.
+                    </p>
+                </div>
+
+                <div>
+                    <form id="contact-form" novalidate>
+                        <div class="form-row">
+                            <label for="name">Имя</label>
+                            <input type="text" id="name" name="name" required placeholder="Как к вам обращаться?">
+                        </div>
+
+                        <div class="form-row">
+                            <label for="email">Email</label>
+                            <!-- Валидация email: HTML5 type="email" + проверка на наличие @ в JS -->
+                            <input type="email" id="email" name="email" required placeholder="name@example.com">
+                            <div class="form-error" id="email-error">Пожалуйста, укажите корректный email с символом «@».</div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" required placeholder="Кратко опишите задачу"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Отправить сообщение</button>
+                        <div class="form-success" id="form-success">
+                            Спасибо! Форма отправлена (демо-режим, без сервера).
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QR-КОД -->
+    <section id="qr">
+        <div class="container">
+            <h2 class="section-title">QR-код сайта</h2>
+            <div class="qr-wrapper">
+                <div class="qr-image">
+                    <!-- ЗАМЕНИ этот img на сгенерированный QR-код с URL твоего сайта -->
+                    <img src="img/qr-code.png" alt="QR-код для быстрого перехода на сайт">
+                </div>
+                <p class="qr-note">
+                    Для отчёта и презентации можно добавить этот QR-код на слайды или на титульный лист. 
+                    Сгенерируйте его через любой онлайн-генератор, указав адрес размещённого сайта 
+                    (например, на Timeweb, Reg.ru или в Yandex Cloud).
+                </p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+        <div>© Иван Петров, 2025. Все права защищены.</div>
+
+        <div class="footer-links">
+            <a href="https://t.me/yournickname" target="_blank" rel="noopener" title="Telegram">
+                <span class="social-icon">TG</span>
+            </a>
+            <a href="https://vk.com/yourprofile" target="_blank" rel="noopener" title="ВКонтакте">
+                <span class="social-icon">VK</span>
+            </a>
+        </div>
+
+        <div class="footer-contacts">
+            <a href="tel:+79991234567">+7&nbsp;999&nbsp;123-45-67</a> ·
+            <a href="mailto:hello@ivan.dev">hello@ivan.dev</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Мобильное меню
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navList = document.getElementById('nav-list');
+
+    menuToggle.addEventListener('click', () => {
+        navList.classList.toggle('open');
+    });
+
+    // Закрываем меню при клике на пункт
+    navList.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            navList.classList.remove('open');
+        }
+    });
+
+    // Валидация email и обработка формы
+    const form = document.getElementById('contact-form');
+    const emailInput = document.getElementById('email');
+    const emailError = document.getElementById('email-error');
+    const successMessage = document.getElementById('form-success');
+
+    form.addEventListener('submit', function (event) {
+        event.preventDefault(); // нет реальной отправки
+
+        const emailValue = emailInput.value.trim();
+
+        // Простая проверка на наличие символа @
+        if (!emailValue.includes('@')) {
+            emailError.style.display = 'block';
+            successMessage.style.display = 'none';
+            return;
+        } else {
+            emailError.style.display = 'none';
+        }
+
+        // Дополнительно можно проверить встроенную валидацию браузера
+        if (!emailInput.checkValidity()) {
+            emailError.style.display = 'block';
+            successMessage.style.display = 'none';
+            return;
+        }
+
+        // Имитация успешной отправки
+        successMessage.style.display = 'block';
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
