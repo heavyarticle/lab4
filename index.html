@@ -489,13 +489,12 @@
                 </div>
             </div>
             <div class="hero-photo-wrapper">
-                <!-- ОРИГИНАЛЬНОЕ ФОТО: замени src на своё изображение -->
                 <div class="hero-photo">
                     <img src="img/me.jpg" alt="Фотография Ивана Петрова за рабочим столом">
                 </div>
                 <p class="hero-photo-caption">
-                    Мой рабочий уголок: ноутбук, заметки и любимая кружка кофе. 
-                    Фото сделано лично, без стоков.
+                    Мой рабочий уголок: ноутбук, заметки. 
+                    Фото сделано лично мной.
                 </p>
             </div>
         </div>
@@ -577,25 +576,23 @@
                 Несколько фрагментов макетов: карточки товаров, заголовки блоков и мобильные версии меню.
             </p>
 
-            <!-- ГАЛЕРЕЯ: замени пути к изображениям на свои работы -->
             <div class="gallery-grid">
                 <figure class="gallery-item">
-                    <img src="img/gallery-1.jpg" alt="Макет лендинга кофейни на ноутбуке">
+                    <img src="img/1.jpg" alt="Макет лендинга кофейни на ноутбуке">
                 </figure>
                 <figure class="gallery-item">
-                    <img src="img/gallery-2.jpg" alt="Фрагмент адаптивного меню сайта">
+                    <img src="img/2.jpg" alt="Фрагмент адаптивного меню сайта">
                 </figure>
                 <figure class="gallery-item">
-                    <img src="img/gallery-3.jpg" alt="Мобильная версия страницы портфолио">
+                    <img src="img/3.jpg" alt="Мобильная версия страницы портфолио">
                 </figure>
                 <figure class="gallery-item">
-                    <img src="img/gallery-4.jpg" alt="Сетка карточек товаров интернет-витрины">
+                    <img src="img/4.jpg" alt="Сетка карточек товаров интернет-витрины">
                 </figure>
             </div>
         </div>
     </section>
 
-    <!-- КОНТАКТЫ + ФОРМА -->
     <section id="contacts">
         <div class="container">
             <h2 class="section-title">Контакты</h2>
@@ -621,7 +618,6 @@
 
                         <div class="form-row">
                             <label for="email">Email</label>
-                            <!-- Валидация email: HTML5 type="email" + проверка на наличие @ в JS -->
                             <input type="email" id="email" name="email" required placeholder="name@example.com">
                             <div class="form-error" id="email-error">Пожалуйста, укажите корректный email с символом «@».</div>
                         </div>
@@ -641,20 +637,13 @@
         </div>
     </section>
 
-    <!-- QR-КОД -->
     <section id="qr">
         <div class="container">
             <h2 class="section-title">QR-код сайта</h2>
             <div class="qr-wrapper">
                 <div class="qr-image">
-                    <!-- ЗАМЕНИ этот img на сгенерированный QR-код с URL твоего сайта -->
                     <img src="img/qr-code.png" alt="QR-код для быстрого перехода на сайт">
                 </div>
-                <p class="qr-note">
-                    Для отчёта и презентации можно добавить этот QR-код на слайды или на титульный лист. 
-                    Сгенерируйте его через любой онлайн-генератор, указав адрес размещённого сайта 
-                    (например, на Timeweb, Reg.ru или в Yandex Cloud).
-                </p>
             </div>
         </div>
     </section>
@@ -682,7 +671,6 @@
 </footer>
 
 <script>
-    // Мобильное меню
     const menuToggle = document.querySelector('.menu-toggle');
     const navList = document.getElementById('nav-list');
 
@@ -690,25 +678,25 @@
         navList.classList.toggle('open');
     });
 
-    // Закрываем меню при клике на пункт
+
     navList.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') {
             navList.classList.remove('open');
         }
     });
 
-    // Валидация email и обработка формы
+
     const form = document.getElementById('contact-form');
     const emailInput = document.getElementById('email');
     const emailError = document.getElementById('email-error');
     const successMessage = document.getElementById('form-success');
 
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // нет реальной отправки
+        event.preventDefault();
 
         const emailValue = emailInput.value.trim();
 
-        // Простая проверка на наличие символа @
+
         if (!emailValue.includes('@')) {
             emailError.style.display = 'block';
             successMessage.style.display = 'none';
@@ -717,18 +705,19 @@
             emailError.style.display = 'none';
         }
 
-        // Дополнительно можно проверить встроенную валидацию браузера
+
         if (!emailInput.checkValidity()) {
             emailError.style.display = 'block';
             successMessage.style.display = 'none';
             return;
         }
 
-        // Имитация успешной отправки
+
         successMessage.style.display = 'block';
         form.reset();
     });
 </script>
 
 </body>
+
 </html>
